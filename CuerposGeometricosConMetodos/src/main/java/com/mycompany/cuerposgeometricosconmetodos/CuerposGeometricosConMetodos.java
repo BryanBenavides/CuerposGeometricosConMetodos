@@ -3,86 +3,56 @@ package com.mycompany.cuerposgeometricosconmetodos;
 import java.util.Scanner;
 
 public class CuerposGeometricosConMetodos {
-
     public static void main(String[] args) {
         Scanner lector = new Scanner(System.in);
-        int intentos = 3;
+        int intentos = 0;
+        int opc;
 
-        while (intentos > 0) {
-            mostrarMenu();
-            if (lector.hasNextInt()) {
-                int opcion = lector.nextInt();
-                lector.nextLine(); // Limpiar el buffer de entrada
+        do {
+        System.out.println("¿Qué figura geométrica desea calcular?");
+        System.out.println("1) Prisma: ");
+        System.out.println("2) Cilindro: ");
+        System.out.println("3) Pirámide: ");
+        System.out.println("4) Cono: ");
+        System.out.println("5) Esfera: ");
+        System.out.println("6) Zona Esférica: ");
+        System.out.println("7) Casquete Esférico: ");
+        System.out.println("8) Huso Esférico y Cuña Esférica: ");
+        System.out.println("9) Ortoedro");
+        System.out.println("10) Tetraedro");
+        System.out.println("11) Hexaedro");
+        System.out.println("12) Octaedro");
+        System.out.println("13) Dodecaedro");
+        System.out.println("14) Icosaedro");
+        System.out.println("15) Tronco de Cono");
+        System.out.println("16) Tronco de Pirámide");
+        System.out.println("17) Salir");
+        opc = lector.nextInt();
 
-                if (opcion >= 1 && opcion <= 16) {
-                    calcularFigura(opcion, lector);
-                    break; // Sale del bucle si la opción es válida
-                } else {
-                    System.out.println("Opción inválida. Debes seleccionar un número del 1 al 16.");
-                    intentos--;
-                    System.out.println("Intentos restantes: " + intentos);
-                }
-            } else {
-                System.out.println("Entrada no válida. Debes ingresar un número entero.");
-                lector.nextLine(); // Limpiar el buffer en caso de entrada no válida
-                intentos--;
-                System.out.println("Intentos restantes: " + intentos);
-            }
-        }
-
-        if (intentos == 0) {
-            System.out.println("Has agotado tus intentos. Adiós.");
-        }
-
-        lector.close();
-    }
-
-    public static void mostrarMenu() {
-        System.out.println("Selecciona una figura geométrica:");
-        System.out.println("1. Prisma");
-        System.out.println("2. Cilindro");
-        System.out.println("3. Pirámide");
-        System.out.println("4. Cono");
-        System.out.println("5. Esfera");
-        System.out.println("6. Zona esférica");
-        System.out.println("7. Casquete esférico");
-        System.out.println("8. Huso esférico y cuña esférica");
-        System.out.println("9. Ortoedro");
-        System.out.println("10. Tetraedro");
-        System.out.println("11. Hexaedro");
-        System.out.println("12. Octaedro");
-        System.out.println("13. Dodecaedro");
-        System.out.println("14. Icosaedro");
-        System.out.println("15. Tronco de cono");
-        System.out.println("16. Tronco de pirámide");
-        System.out.print("Elige una opción: ");
-    }
-
-    public static void calcularFigura(int opcion, Scanner lector) {
-        switch (opcion) {
+        switch (opc) {
             case 1:
-                calcularPrisma(lector);
+                calcularPrisma();
                 break;
             case 2:
-                calcularCilindro(lector);
+                calcularCilindro();
                 break;
             case 3:
-                calcularPiramide(lector);
+                calcularPiramide();
                 break;
             case 4:
-                calcularCono(lector);
+                calcularCono();
                 break;
             case 5:
-                calcularEsfera(lector);
+                calcularEsfera();
                 break;
             case 6:
-                calcularZonaEsferica(lector);
+                calcularZonaEsferica();
                 break;
             case 7:
-                calcularCasqueteEsferico(lector);
+                calcularCasqueteEsferico();
                 break;
             case 8:
-                calcularHusoYCuñaEsferica(lector);
+                calcularHusoCuñaEsferica();
                 break;
             case 9:
                 calcularOrtoedro(lector);
@@ -98,236 +68,819 @@ public class CuerposGeometricosConMetodos {
                 break;
             case 13:
                 calcularDodecaedro(lector);
-                break;
+                break;    
             case 14:
-                calcularIcosaedro(lector);
+                calculoIcosaedro();
                 break;
             case 15:
-                calcularTroncoDeCono(lector);
+                calculoTroncoCono();
                 break;
             case 16:
-                calcularTroncoDePiramide(lector);
+                calculoTroncoPiramide();
+                break;
+            case 17:
+                System.out.println("Saliendo del sistema");
                 break;
             default:
-                System.out.println("Opción inválida.");
+                    System.out.println("Por favor, ingrese una opción válida.");
+                    intentos++;
+            }
+        } while (intentos < 3 && opc != 17);
+
+        lector.close();
+    }
+
+    public static void calcularPrisma() {
+        Scanner lector = new Scanner(System.in);
+        char calculo;
+        double areaLateral = 0, areaTotal = 0, volumen = 0;
+        int cantidadLados = 0, intentos;
+        double longitudLados = 0, altura = 0;
+
+        System.out.println("¿Qué parte de la figura desea calcular?");
+        System.out.println("a) Área Lateral");
+        System.out.println("b) Área Total");
+        System.out.println("c) Volumen");
+        calculo = lector.next().charAt(0);
+
+        for (intentos = 0; intentos < 3; intentos++) {
+            System.out.print("Cantidad de lados: ");
+            cantidadLados = lector.nextInt();
+            System.out.print("Altura: ");
+            altura = lector.nextDouble();
+            System.out.print("Longitud de los lados: ");
+            longitudLados = lector.nextDouble();
+
+            if (cantidadLados > 0 && altura > 0 && longitudLados > 0) {
+                double perimetroBase = cantidadLados * longitudLados;
+                areaLateral = perimetroBase * altura;
+                double alfa = (Math.PI / 180) * (360 / cantidadLados);
+                double apotema = longitudLados / (2 * Math.tan((alfa) / 2));
+                double areaBase = (perimetroBase * apotema) / 2;
+                areaTotal = areaLateral + 2 * areaBase;
+                volumen = areaBase * altura;
+                break;
+            } else {
+                System.out.println("No se permiten negativos ni cero.");
+            }
+        }
+
+        if (calculo == 'a') {
+            if (cantidadLados > 0 && altura > 0 && longitudLados > 0) {
+                System.out.println("Área Lateral: " + areaLateral + " unidades cuadradas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else if (calculo == 'b') {
+            if (cantidadLados > 0 && altura > 0 && longitudLados > 0) {
+                System.out.println("Área Total: " + areaTotal + " unidades cuadradas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else if (calculo == 'c') {
+            if (cantidadLados > 0 && altura > 0 && longitudLados > 0) {
+                System.out.println("Volumen: " + volumen + " unidades cúbicas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else {
+            System.out.println("Por favor ingrese una opción válida.");
         }
     }
 
-    public static void calcularPrisma(Scanner lector) {
-        System.out.println("Cantidad de lados: ");
-        int cantidadLadosPrisma = lector.nextInt();
-        System.out.println("Longitud de los lados: ");
-        double longitudLadosPrisma = lector.nextDouble();
-        System.out.println("Altura: ");
-        double alturaPrisma = lector.nextDouble();
-        double perimetroBasePrisma = cantidadLadosPrisma * longitudLadosPrisma;
-        double areaLateralPrisma = perimetroBasePrisma * alturaPrisma;
-        double alfaPrisma = (Math.PI / 180) * (360 / cantidadLadosPrisma);
-        double apotemaPrisma = longitudLadosPrisma / (2 * Math.tan(alfaPrisma / 2));
-        double areaBasePrisma = (perimetroBasePrisma * apotemaPrisma / 2);
-        double areaTotalPrisma = areaLateralPrisma + 2 * areaBasePrisma;
-        double volumenPrisma = areaBasePrisma * alturaPrisma;
-        System.out.println("Área Lateral: " + areaLateralPrisma + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalPrisma + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenPrisma + " unidades cúbicas");
+    public static void calcularCilindro() {
+        Scanner lector = new Scanner(System.in);
+        char calculo;
+        double areaLateral = 0, areaTotal = 0, volumen = 0;
+        double altura = 0, radio = 0;
+        int intentos;
+
+        System.out.println("¿Qué parte de la figura desea calcular?");
+        System.out.println("a) Área Lateral");
+        System.out.println("b) Área Total");
+        System.out.println("c) Volumen");
+        calculo = lector.next().charAt(0);
+
+        for (intentos = 0; intentos < 3; intentos++) {
+            System.out.println("Altura: ");
+            altura = lector.nextDouble();
+            System.out.println("Radio: ");
+            radio = lector.nextDouble();
+
+            if (radio > 0 && altura > 0) {
+                double perimetroBase = radio * (Math.PI * 2);
+                areaLateral = altura * perimetroBase;
+                double areaBase = (Math.PI) * Math.pow(radio, 2);
+                areaTotal = areaLateral + 2 * areaBase;
+                volumen = areaBase * altura;
+                break;
+            } else {
+                System.out.println("No se permiten valores negativos ni cero.");
+            }
+        }
+
+        if (calculo == 'a') {
+            if (radio > 0 && altura > 0) {
+                System.out.println("Área Lateral: " + areaLateral + " unidades cuadradas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else if (calculo == 'b') {
+            if (radio > 0 && altura > 0) {
+                System.out.println("Área Total: " + areaTotal + " unidades cuadradas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else if (calculo == 'c') {
+            if (radio > 0 && altura > 0) {
+                System.out.println("Volumen: " + volumen + " unidades cúbicas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else {
+            System.out.println("Por favor ingrese una opción válida.");
+        }
     }
 
-    public static void calcularCilindro(Scanner lector) {
-        System.out.println("Ingrese el radio: ");
-        double radioCilindro = lector.nextDouble();
-        System.out.println("Ingrese la altura: ");
-        double alturaCilindro = lector.nextDouble();
-        double perimetroBaseCilindro = 2 * Math.PI * radioCilindro;
-        double areaLateralCilindro = perimetroBaseCilindro * alturaCilindro;
-        double areaBaseCilindro = Math.PI * Math.pow(radioCilindro, 2);
-        double areaTotalCilindro = areaLateralCilindro + areaBaseCilindro;
-        double volumenCilindro = areaBaseCilindro * alturaCilindro;
-        System.out.println("Área Lateral: " + areaLateralCilindro + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalCilindro + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenCilindro + " unidades cúbicas");
+    public static void calcularPiramide() {
+        Scanner lector = new Scanner(System.in);
+        char calculo;
+        double areaLateral = 0, areaTotal = 0, volumen = 0;
+        double apotema = 0, altura = 0;
+        int intentos, lados = 0;
+
+        System.out.println("¿Qué parte de la figura desea calcular?");
+        System.out.println("a) Área Lateral");
+        System.out.println("b) Área Total");
+        System.out.println("c) Volumen");
+        calculo = lector.next().charAt(0);
+
+        for (intentos = 0; intentos < 3; intentos++) {
+            System.out.print("Cantidad de lados: ");
+            lados = lector.nextInt();
+            System.out.print("Apotema de la base: ");
+            apotema = lector.nextDouble();
+            System.out.print("Altura de la pirámide: ");
+            altura = lector.nextDouble();
+
+            if (lados > 0 && apotema > 0 && altura > 0) {
+                double perimetroBase = lados * 2 * apotema;
+                areaLateral = (perimetroBase * altura) / 2;
+                double areaBase = (lados * apotema * apotema) / 2;
+                areaTotal = areaLateral + areaBase;
+                volumen = (areaBase * altura) / 3;
+                break;
+            } else {
+                System.out.println("No se permiten valores negativos ni cero.");
+            }
+        }
+
+        if (calculo == 'a') {
+            if (lados > 0 && apotema > 0 && altura > 0) {
+                System.out.println("Área Lateral: " + areaLateral + " unidades cuadradas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else if (calculo == 'b') {
+            if (lados > 0 && apotema > 0 && altura > 0) {
+                System.out.println("Área Total: " + areaTotal + " unidades cuadradas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else if (calculo == 'c') {
+            if (lados > 0 && apotema > 0 && altura > 0) {
+                System.out.println("Volumen: " + volumen + " unidades cúbicas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else {
+            System.out.println("Por favor ingrese una opción válida.");
+        }
     }
 
-    public static void calcularPiramide(Scanner lector) {
-        System.out.println("Ingrese la cantidad de lados: ");
-        int cantidadLadosPiramide = lector.nextInt();
-        System.out.println("Ingrese su longitud: ");
-        double longitudLadosPiramide = lector.nextDouble();
-        System.out.println("Ingrese la altura: ");
-        double alturaPiramide = lector.nextDouble();
-        double perimetroBasePiramide = cantidadLadosPiramide * longitudLadosPiramide;
-        double alfaPiramide = (Math.PI / 180) * (360 / cantidadLadosPiramide);
-        double apotemaPiramide = longitudLadosPiramide / (2 * Math.tan(alfaPiramide / 2));
-        double areaBasePiramide = (perimetroBasePiramide * apotemaPiramide / 2);
-        double areaLateralPiramide = perimetroBasePiramide * alturaPiramide / 2;
-        double areaTotalPiramide = areaLateralPiramide + areaBasePiramide;
-        double volumenPiramide = (areaBasePiramide * alturaPiramide) / 3;
-        System.out.println("Área Lateral: " + areaLateralPiramide + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalPiramide + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenPiramide + " unidades cúbicas");
+    public static void calcularCono() {
+        Scanner lector = new Scanner(System.in);
+        char calculo;
+        double areaLateral = 0, areaTotal = 0, volumen = 0;
+        double radio = 0, altura = 0;
+        int intentos;
+
+        System.out.println("¿Qué parte de la figura desea calcular?");
+        System.out.println("a) Área Lateral");
+        System.out.println("b) Área Total");
+        System.out.println("c) Volumen");
+        calculo = lector.next().charAt(0);
+
+        for (intentos = 0; intentos < 3; intentos++) {
+            System.out.print("Radio: ");
+            radio = lector.nextDouble();
+            System.out.print("Altura: ");
+            altura = lector.nextDouble();
+
+            if (radio > 0 && altura > 0) {
+                double generatriz = Math.sqrt((radio * radio) + (altura * altura));
+                areaLateral = Math.PI * radio * generatriz;
+                double areaBase = Math.PI * Math.pow(radio, 2);
+                areaTotal = areaLateral + areaBase;
+                volumen = (areaBase * altura) / 3;
+                break;
+            } else {
+                System.out.println("No se permiten valores negativos ni cero.");
+            }
+        }
+
+        if (calculo == 'a') {
+            if (radio > 0 && altura > 0) {
+                System.out.println("Área Lateral: " + areaLateral + " unidades cuadradas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else if (calculo == 'b') {
+            if (radio > 0 && altura > 0) {
+                System.out.println("Área Total: " + areaTotal + " unidades cuadradas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else if (calculo == 'c') {
+            if (radio > 0 && altura > 0) {
+                System.out.println("Volumen: " + volumen + " unidades cúbicas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else {
+            System.out.println("Por favor ingrese una opción válida.");
+        }
     }
 
-    public static void calcularCono(Scanner lector) {
-        System.out.println("Ingrese el radio: ");
-        double radioCono = lector.nextDouble();
-        System.out.println("Ingrese la altura: ");
-        double alturaCono = lector.nextDouble();
-        double generatrizCono = Math.sqrt(Math.pow(radioCono, 2) + Math.pow(alturaCono, 2));
-        double areaLateralCono = Math.PI * radioCono * generatrizCono;
-        double areaBaseCono = Math.PI * Math.pow(radioCono, 2);
-        double areaTotalCono = areaLateralCono + areaBaseCono;
-        double volumenCono = (areaBaseCono * alturaCono) / 3;
-        System.out.println("Área Lateral: " + areaLateralCono + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalCono + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenCono + " unidades cúbicas");
+    public static void calcularEsfera() {
+        Scanner lector = new Scanner(System.in);
+        char calculo;
+        double area = 0, volumen = 0;
+        double radio = 0;
+        int intentos;
+
+        System.out.println("¿Qué parte de la figura desea calcular?");
+        System.out.println("a) Área Superficial");
+        System.out.println("b) Volumen");
+        calculo = lector.next().charAt(0);
+
+        for (intentos = 0; intentos < 3; intentos++) {
+            System.out.print("Radio: ");
+            radio = lector.nextDouble();
+
+            if (radio > 0) {
+                area = 4 * Math.PI * Math.pow(radio, 2);
+                volumen = (4.0 / 3.0) * Math.PI * Math.pow(radio, 3);
+                break;
+            } else {
+                System.out.println("No se permiten valores negativos ni cero.");
+            }
+        }
+
+        if (calculo == 'a') {
+            if (radio > 0) {
+                System.out.println("Área Superficial: " + area + " unidades cuadradas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else if (calculo == 'b') {
+            if (radio > 0) {
+                System.out.println("Volumen: " + volumen + " unidades cúbicas.");
+            } else {
+                System.out.println("Intentos gastados. Programa terminado.");
+            }
+        } else {
+            System.out.println("Por favor ingrese una opción válida.");
+        }
     }
 
-    public static void calcularEsfera(Scanner lector) {
-        System.out.println("Ingrese el radio: ");
-        double radioEsfera = lector.nextDouble();
-        double areaSuperficieEsfera = 4 * Math.PI * Math.pow(radioEsfera, 2);
-        double volumenEsfera = (4.0 / 3) * Math.PI * Math.pow(radioEsfera, 3);
-        System.out.println("Área Superficie: " + areaSuperficieEsfera + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenEsfera + " unidades cúbicas");
+    public static void calcularZonaEsferica() {
+        Scanner lector = new Scanner(System.in);
+        double porcionSuperficie = 0, porcionEsfera = 0;
+        double radio = 0, angulo = 0, intentos;
+
+        for (intentos = 0; intentos < 3; intentos++) {
+            System.out.print("Radio de la esfera: ");
+            radio = lector.nextDouble();
+            System.out.print("Ángulo en grados: ");
+            angulo = lector.nextDouble();
+
+            if (radio > 0 && angulo >= 0 && angulo <= 360) {
+                porcionSuperficie = (2 * Math.PI * radio * angulo) / 360;
+                porcionEsfera = (4 * Math.PI * Math.pow(radio, 2) * angulo) / 360;
+                break;
+            } else {
+                System.out.println("No se permiten valores negativos ni ángulos fuera del rango [0, 360].");
+            }
+        }
+
+        if (radio > 0 && angulo >= 0 && angulo <= 360) {
+            System.out.println("Área de la zona esférica: " + porcionSuperficie + " unidades cuadradas.");
+            System.out.println("Área de la porción de la esfera: " + porcionEsfera + " unidades cuadradas.");
+        } else {
+            System.out.println("Intentos gastados. Programa terminado.");
+        }
     }
 
-    public static void calcularZonaEsferica(Scanner lector) {
-        System.out.println("Ingrese el radio: ");
-        double radioZonaEsferica = lector.nextDouble();
-        System.out.println("Ingrese el ángulo central en grados: ");
-        double anguloCentralZonaEsferica = lector.nextDouble();
-        double areaZonaEsferica = (anguloCentralZonaEsferica / 360) * (4 * Math.PI * Math.pow(radioZonaEsferica, 2));
-        System.out.println("Área: " + areaZonaEsferica + " unidades cuadradas.");
+    public static void calcularCasqueteEsferico() {
+        Scanner lector = new Scanner(System.in);
+        double areaSuperficie = 0, volumen = 0;
+        double radio = 0, altura = 0, intentos;
+
+        for (intentos = 0; intentos < 3; intentos++) {
+            System.out.print("Radio de la esfera: ");
+            radio = lector.nextDouble();
+            System.out.print("Altura del casquete: ");
+            altura = lector.nextDouble();
+
+            if (radio > 0 && altura > 0) {
+                double h = radio - altura;
+                double l = Math.sqrt((2 * radio * altura) - (altura * altura));
+                areaSuperficie = 2 * Math.PI * radio * l;
+                volumen = (Math.PI * altura * altura * (3 * radio - altura)) / 3;
+                break;
+            } else {
+                System.out.println("No se permiten valores negativos ni cero.");
+            }
+        }
+
+        if (radio > 0 && altura > 0) {
+            System.out.println("Área de la superficie del casquete esférico: " + areaSuperficie + " unidades cuadradas.");
+            System.out.println("Volumen del casquete esférico: " + volumen + " unidades cúbicas.");
+        } else {
+            System.out.println("Intentos gastados. Programa terminado.");
+        }
     }
 
-    public static void calcularCasqueteEsferico(Scanner lector) {
-        System.out.println("Ingrese el radio: ");
-        double radioCasqueteEsferico = lector.nextDouble();
-        System.out.println("Ingrese la altura: ");
-        double alturaCasqueteEsferico = lector.nextDouble();
-        double generatrizCasqueteEsferico = Math.sqrt(Math.pow(radioCasqueteEsferico, 2) - Math.pow(alturaCasqueteEsferico, 2));
-        double areaCasqueteEsferico = 2 * Math.PI * radioCasqueteEsferico * generatrizCasqueteEsferico;
-        double areaBaseCasqueteEsferico = Math.PI * Math.pow(radioCasqueteEsferico, 2);
-        System.out.println("Área Lateral: " + areaCasqueteEsferico + " unidades cuadradas.");
-        System.out.println("Área Base: " + areaBaseCasqueteEsferico + " unidades cuadradas.");
-    }
+    public static void calcularHusoCuñaEsferica() {
+        Scanner lector = new Scanner(System.in);
+        double areaSuperficie = 0, volumen = 0;
+        double radio = 0, altura = 0, angulo = 0, intentos;
 
-    public static void calcularHusoYCuñaEsferica(Scanner lector) {
-        System.out.println("Ingrese el radio: ");
-        double radioHusoCuñaEsferica = lector.nextDouble();
-        System.out.println("Ingrese el ángulo central en grados: ");
-        double anguloCentralHusoCuñaEsferica = lector.nextDouble();
-        double areaHusoEsferico = (anguloCentralHusoCuñaEsferica / 360) * (4 * Math.PI * Math.pow(radioHusoCuñaEsferica, 2));
-        double volumenCuñaEsferica = (anguloCentralHusoCuñaEsferica / 360) * (2.0 / 3) * Math.PI * Math.pow(radioHusoCuñaEsferica, 3);
-        System.out.println("Área: " + areaHusoEsferico + " unidades cuadradas.");
-        System.out.println("Volumen Cuña Esférica: " + volumenCuñaEsferica + " unidades cúbicas.");
-    }
+        for (intentos = 0; intentos < 3; intentos++) {
+            System.out.print("Radio de la esfera: ");
+            radio = lector.nextDouble();
+            System.out.print("Altura del huso o cuña: ");
+            altura = lector.nextDouble();
+            System.out.print("Ángulo en grados: ");
+            angulo = lector.nextDouble();
 
+            if (radio > 0 && altura > 0 && angulo >= 0 && angulo <= 360) {
+                double l = 2 * radio * Math.sin(Math.toRadians(angulo) / 2);
+                double a = 2 * Math.PI * radio * (angulo / 360);
+                areaSuperficie = Math.PI * radio * l + a * altura;
+                volumen = (Math.PI * altura * altura * (3 * radio - altura)) / 3;
+                break;
+            } else {
+                System.out.println("No se permiten valores negativos ni ángulos fuera del rango [0, 360].");
+            }
+        }
+
+        if (radio > 0 && altura > 0 && angulo >= 0 && angulo <= 360) {
+            System.out.println("Área de la superficie del huso o cuña esférica: " + areaSuperficie + " unidades cuadradas.");
+            System.out.println("Volumen del huso o cuña esférica: " + volumen + " unidades cúbicas.");
+        } else {
+            System.out.println("Intentos gastados. Programa terminado.");
+        }
+    }
+    
     public static void calcularOrtoedro(Scanner lector) {
-        System.out.println("Ingrese la longitud: ");
-        double longitudOrtoedro = lector.nextDouble();
-        System.out.println("Ingrese la anchura: ");
-        double anchuraOrtoedro = lector.nextDouble();
-        System.out.println("Ingrese la altura: ");
-        double alturaOrtoedro = lector.nextDouble();
-        double areaLateralOrtoedro = 2 * (longitudOrtoedro * alturaOrtoedro + longitudOrtoedro * anchuraOrtoedro + alturaOrtoedro * anchuraOrtoedro);
-        double volumenOrtoedro = longitudOrtoedro * anchuraOrtoedro * alturaOrtoedro;
-        System.out.println("Área Lateral: " + areaLateralOrtoedro + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenOrtoedro + " unidades cúbicas.");
+        double longitud, profundidad, altura;
+        longitud = obtenerDimension("longitud", lector);
+        profundidad = obtenerDimension("profundidad", lector);
+        altura = obtenerDimension("altura", lector);
+
+        if (longitud <= 0 || profundidad <= 0 || altura <= 0) {
+            System.out.println("No se permiten valores negativos o cero.");
+            return;
+        }
+
+        double area = calcularAreaOrtoedro(longitud, profundidad, altura);
+        double volumen = calcularVolumenOrtoedro(longitud, profundidad, altura);
+        double diagonal = calcularDiagonalOrtoedro(longitud, profundidad, altura);
+
+        System.out.println("Área: " + area);
+        System.out.println("Volumen: " + volumen);
+        System.out.println("Diagonal: " + diagonal);
+    }
+
+    public static double calcularAreaOrtoedro(double longitud, double profundidad, double altura) {
+        return 2 * ((altura * longitud) + (altura * profundidad) + (longitud * profundidad));
+    }
+
+    public static double calcularVolumenOrtoedro(double longitud, double profundidad, double altura) {
+        return altura * longitud * profundidad;
+    }
+
+    public static double calcularDiagonalOrtoedro(double longitud, double profundidad, double altura) {
+        double cDiag = Math.pow(altura, 2) + Math.pow(longitud, 2) + Math.pow(profundidad, 2);
+        return Math.sqrt(cDiag);
     }
 
     public static void calcularTetraedro(Scanner lector) {
-        System.out.println("Ingrese la longitud de un lado: ");
-        double longitudLadoTetraedro = lector.nextDouble();
-        double areaLateralTetraedro = Math.sqrt(3) * Math.pow(longitudLadoTetraedro, 2);
-        double areaBaseTetraedro = (Math.pow(longitudLadoTetraedro, 2) * Math.sqrt(3)) / 4;
-        double areaTotalTetraedro = areaLateralTetraedro + 3 * areaBaseTetraedro;
-        double volumenTetraedro = (Math.pow(longitudLadoTetraedro, 3) * Math.sqrt(2)) / 12;
-        System.out.println("Área Lateral: " + areaLateralTetraedro + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalTetraedro + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenTetraedro + " unidades cúbicas.");
+        double arista = obtenerDimension("arista", lector);
+
+        if (arista <= 0) {
+            System.out.println("No se permiten valores negativos o cero.");
+            return;
+        }
+
+        double area = calcularAreaTetraedro(arista);
+        double volumen = calcularVolumenTetraedro(arista);
+        double altura = calcularAlturaTetraedro(arista);
+
+        System.out.println("Área: " + area);
+        System.out.println("Volumen: " + volumen);
+        System.out.println("Altura: " + altura);
+    }
+
+    public static double calcularAreaTetraedro(double arista) {
+        return Math.pow(arista, 2) * Math.sqrt(3);
+    }
+
+    public static double calcularVolumenTetraedro(double arista) {
+        return (Math.sqrt(2) / 12) * Math.pow(calcularAreaTetraedro(arista), 3);
+    }
+
+    public static double calcularAlturaTetraedro(double arista) {
+        return arista * Math.sqrt(6) / 3;
     }
 
     public static void calcularHexaedro(Scanner lector) {
-        System.out.println("Ingrese la longitud de un lado: ");
-        double longitudLadoHexaedro = lector.nextDouble();
-        double areaLateralHexaedro = 4 * Math.pow(longitudLadoHexaedro, 2);
-        double areaTotalHexaedro = 6 * Math.pow(longitudLadoHexaedro, 2);
-        double volumenHexaedro = Math.pow(longitudLadoHexaedro, 3);
-        System.out.println("Área Lateral: " + areaLateralHexaedro + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalHexaedro + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenHexaedro + " unidades cúbicas.");
+        double arista = obtenerDimension("arista", lector);
+
+        if (arista <= 0) {
+            System.out.println("No se permiten valores negativos o cero.");
+            return;
+        }
+
+        double area = calcularAreaHexaedro(arista);
+        double volumen = calcularVolumenHexaedro(arista);
+        double diagonal = calcularDiagonalHexaedro(arista);
+
+        System.out.println("Área: " + area);
+        System.out.println("Volumen: " + volumen);
+        System.out.println("Diagonal: " + diagonal);
+    }
+
+    public static double calcularAreaHexaedro(double arista) {
+        return 6 * Math.pow(arista, 2);
+    }
+
+    public static double calcularVolumenHexaedro(double arista) {
+        return Math.pow(arista, 3);
+    }
+
+    public static double calcularDiagonalHexaedro(double arista) {
+        return arista * Math.sqrt(3);
     }
 
     public static void calcularOctaedro(Scanner lector) {
-        System.out.println("Ingrese la longitud de un lado: ");
-        double longitudLadoOctaedro = lector.nextDouble();
-        double areaLateralOctaedro = 2 * Math.pow(longitudLadoOctaedro, 2) * Math.sqrt(2);
-        double areaTotalOctaedro = 2 * Math.sqrt(2) * Math.pow(longitudLadoOctaedro, 2);
-        double volumenOctaedro = (Math.sqrt(2) / 3) * Math.pow(longitudLadoOctaedro, 3);
-        System.out.println("Área Lateral: " + areaLateralOctaedro + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalOctaedro + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenOctaedro + " unidades cúbicas.");
+        double arista = obtenerDimension("arista", lector);
+
+        if (arista <= 0) {
+            System.out.println("No se permiten valores negativos o cero.");
+            return;
+        }
+
+        double area = calcularAreaOctaedro(arista);
+        double volumen = calcularVolumenOctaedro(arista);
+        double diagonal = calcularDiagonalOctaedro(arista);
+
+        System.out.println("Área: " + area);
+        System.out.println("Volumen: " + volumen);
+        System.out.println("Diagonal: " + diagonal);
+    }
+
+    public static double calcularAreaOctaedro(double arista) {
+        return 2 * Math.pow(arista, 2) * Math.sqrt(3);
+    }
+
+    public static double calcularVolumenOctaedro(double arista) {
+        return (Math.sqrt(2) / 3) * Math.pow(arista, 3);
+    }
+
+    public static double calcularDiagonalOctaedro(double arista) {
+        return arista * Math.sqrt(2);
     }
 
     public static void calcularDodecaedro(Scanner lector) {
-        System.out.println("Ingrese la longitud de un lado: ");
-        double longitudLadoDodecaedro = lector.nextDouble();
-        double areaLateralDodecaedro = 3 * Math.pow(longitudLadoDodecaedro, 2) * Math.sqrt(5);
-        double areaTotalDodecaedro = 15 * Math.pow(longitudLadoDodecaedro, 2);
-        double volumenDodecaedro = (15 + 7.5 * Math.sqrt(5)) * Math.pow(longitudLadoDodecaedro, 3) / 4;
-        System.out.println("Área Lateral: " + areaLateralDodecaedro + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalDodecaedro + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenDodecaedro + " unidades cúbicas.");
+        double arista = obtenerDimension("arista", lector);
+        double cantidadLados = obtenerDimension("cantidad de lados", lector);
+        double lado = obtenerDimension("lado", lector);
+
+        if (arista <= 0 || cantidadLados <= 0 || lado <= 0) {
+            System.out.println("No se permiten valores negativos o cero.");
+            return;
+        }
+
+        double areaPentagonal = calcularAreaPentagonalDodecaedro(arista, cantidadLados, lado);
+        double area = calcularAreaDodecaedro(arista, cantidadLados);
+        double volumen = calcularVolumenDodecaedro(arista);
+
+        System.out.println("Área Pentagonal: " + areaPentagonal);
+        System.out.println("Área: " + area);
+        System.out.println("Volumen: " + volumen);
     }
 
-    public static void calcularIcosaedro(Scanner lector) {
-        System.out.println("Ingrese la longitud de un lado: ");
-        double longitudLadoIcosaedro = lector.nextDouble();
-        double areaLateralIcosaedro = 5 * Math.sqrt(3) * Math.pow(longitudLadoIcosaedro, 2);
-        double areaTotalIcosaedro = 5 * Math.sqrt(3) * Math.pow(longitudLadoIcosaedro, 2);
-        double volumenIcosaedro = (5 / 12) * (3 + Math.sqrt(5)) * Math.pow(longitudLadoIcosaedro, 3);
-        System.out.println("Área Lateral: " + areaLateralIcosaedro + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalIcosaedro + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenIcosaedro + " unidades cúbicas.");
+    public static double calcularAreaPentagonalDodecaedro(double arista, double cantidadLados, double lado) {
+        double angulo = 360 / (2 * cantidadLados);
+        double apotema = lado / (2 * Math.tan(Math.toRadians(angulo)));
+        return 5 / 2 * (arista * apotema);
     }
 
-    public static void calcularTroncoDeCono(Scanner lector) {
-        System.out.println("Ingrese el radio mayor: ");
-        double radioMayorTroncoCono = lector.nextDouble();
-        System.out.println("Ingrese el radio menor: ");
-        double radioMenorTroncoCono = lector.nextDouble();
-        System.out.println("Ingrese la altura: ");
-        double alturaTroncoCono = lector.nextDouble();
-        double generatrizMayorTroncoCono = Math.sqrt(Math.pow(radioMayorTroncoCono, 2) + Math.pow(alturaTroncoCono, 2));
-        double generatrizMenorTroncoCono = Math.sqrt(Math.pow(radioMenorTroncoCono, 2) + Math.pow(alturaTroncoCono, 2));
-        double areaLateralTroncoCono = Math.PI * (radioMayorTroncoCono + radioMenorTroncoCono) * (generatrizMayorTroncoCono + generatrizMenorTroncoCono);
-        double areaBaseMayorTroncoCono = Math.PI * Math.pow(radioMayorTroncoCono, 2);
-        double areaBaseMenorTroncoCono = Math.PI * Math.pow(radioMenorTroncoCono, 2);
-        double areaTotalTroncoCono = areaLateralTroncoCono + areaBaseMayorTroncoCono + areaBaseMenorTroncoCono;
-        double volumenTroncoCono = (1.0 / 3) * Math.PI * alturaTroncoCono * (Math.pow(radioMayorTroncoCono, 2) + Math.pow(radioMenorTroncoCono, 2) + (radioMayorTroncoCono * radioMenorTroncoCono));
-        System.out.println("Área Lateral: " + areaLateralTroncoCono + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalTroncoCono + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenTroncoCono + " unidades cúbicas.");
+    public static double calcularAreaDodecaedro(double arista, double cantidadLados) {
+        return 3 * Math.pow(arista, 2) * (Math.sqrt(25 + 10 * Math.sqrt(5)));
     }
 
-    public static void calcularTroncoDePiramide(Scanner lector) {
-        System.out.println("Ingrese la longitud de un lado de la base mayor: ");
-        double longitudBaseMayorTroncoPiramide = lector.nextDouble();
-        System.out.println("Ingrese la longitud de un lado de la base menor: ");
-        double longitudBaseMenorTroncoPiramide = lector.nextDouble();
-        System.out.println("Ingrese la altura: ");
-        double alturaTroncoPiramide = lector.nextDouble();
-        double perimetroBaseMayorTroncoPiramide = 5 * longitudBaseMayorTroncoPiramide;
-        double apotemaBaseMayorTroncoPiramide = longitudBaseMayorTroncoPiramide / (2 * Math.tan(Math.PI / 5));
-        double areaBaseMayorTroncoPiramide = (perimetroBaseMayorTroncoPiramide * apotemaBaseMayorTroncoPiramide) / 2;
-        double perimetroBaseMenorTroncoPiramide = 5 * longitudBaseMenorTroncoPiramide;
-        double apotemaBaseMenorTroncoPiramide = longitudBaseMenorTroncoPiramide / (2 * Math.tan(Math.PI / 5));
-        double areaBaseMenorTroncoPiramide = (perimetroBaseMenorTroncoPiramide * apotemaBaseMenorTroncoPiramide) / 2;
-        double areaLateralTroncoPiramide = (5 * (longitudBaseMayorTroncoPiramide + longitudBaseMenorTroncoPiramide) / 2) * alturaTroncoPiramide;
-        double areaTotalTroncoPiramide = areaBaseMayorTroncoPiramide + areaBaseMenorTroncoPiramide + areaLateralTroncoPiramide;
-        double volumenTroncoPiramide = (alturaTroncoPiramide / 3) * (areaBaseMayorTroncoPiramide + areaBaseMenorTroncoPiramide + Math.sqrt(areaBaseMayorTroncoPiramide * areaBaseMenorTroncoPiramide));
-        System.out.println("Área Lateral: " + areaLateralTroncoPiramide + " unidades cuadradas.");
-        System.out.println("Área Total: " + areaTotalTroncoPiramide + " unidades cuadradas.");
-        System.out.println("Volumen: " + volumenTroncoPiramide + " unidades cúbicas.");
+    public static double calcularVolumenDodecaedro(double arista) {
+        return 1 / 4 * (15 + 7 * Math.sqrt(5)) * Math.pow(arista, 3);
+    }
+
+    public static double obtenerDimension(String nombreDimension, Scanner lector) {
+        System.out.println("Ingrese la " + nombreDimension + ": ");
+        return lector.nextDouble();
+    }
+    
+    public static void calculoIcosaedro() {
+        Scanner lector = new Scanner(System.in);
+        char calculo;
+
+        double arista = 0;
+        double area = 0;
+        double volumen = 0;
+
+        System.out.println("¿Qué parte del icosaedro desea calcular?");
+        System.out.println("a) Área");
+        System.out.println("b) Volumen");
+        calculo = lector.next().charAt(0);
+
+        switch (calculo) {
+            case 'a':
+                for (int intentos = 0; intentos < 3; intentos++) {
+                    System.out.println("Arista: ");
+                    arista = lector.nextDouble();
+
+                    if (arista > 0) {
+                        area = 5 * Math.pow(arista, 2) * Math.sqrt(3);
+                        break;
+                    } else {
+                        System.out.println("No se permiten negativos ni cero");
+                    }
+                }
+
+                if (arista > 0) {
+                    System.out.println("Área: " + area);
+                } else {
+                    System.out.println("Intentos gastados. Programa terminado.");
+                }
+                break;
+
+            case 'b':
+                for (int intentos = 0; intentos < 3; intentos++) {
+                    System.out.println("Arista: ");
+                    arista = lector.nextDouble();
+
+                    if (arista > 0) {
+                        volumen = 5 / 12 * (3 + Math.sqrt(5)) * Math.pow(arista, 3);
+                        break;
+                    } else {
+                        System.out.println("No se permiten negativos ni cero");
+                    }
+                }
+
+                if (arista > 0) {
+                    System.out.println("Volumen: " + volumen);
+                } else {
+                    System.out.println("Intentos gastados. Programa terminado.");
+                }
+                break;
+
+            default:
+                System.out.println("Ingrese una opción válida");
+        }
+
+        lector.close();
+    }
+
+    public static void calculoTroncoCono() {
+        Scanner lector = new Scanner(System.in);
+        char calculo;
+
+        double radio = 0, altura = 0, radioMayor = 0, generatriz = 0;
+        double areaLateral = 0, areaBaseMayor = 0, areaBaseMenor = 0, areaTotal = 0, volumen = 0, totalVol = 0;
+        double Pixal, radiosCuadrados, radxrad;
+
+        System.out.println("¿Qué parte del tronco de cono desea calcular?");
+        System.out.println("a) Área Lateral");
+        System.out.println("b) Área Total");
+        System.out.println("c) Volumen");
+        calculo = lector.next().charAt(0);
+
+        switch (calculo) {
+            case 'a':
+                for (int intentos = 0; intentos < 3; intentos++) {
+                    System.out.println("Radio: ");
+                    radio = lector.nextDouble();
+                    System.out.println("Altura: ");
+                    altura = lector.nextDouble();
+                    System.out.println("Radio Mayor: ");
+                    radioMayor = lector.nextDouble();
+                    System.out.println("Generatriz: ");
+                    generatriz = lector.nextDouble();
+
+                    if (radio > 0 && altura > 0 && radioMayor > 0 && generatriz > 0) {
+                        areaLateral = (Math.PI * generatriz) * (radioMayor + radio);
+                        break;
+                    } else {
+                        System.out.println("No se permiten negativos ni cero");
+                    }
+                }
+
+                if (radio > 0 && altura > 0 && radioMayor > 0 && generatriz > 0) {
+                    System.out.println("Área Lateral: " + areaLateral);
+                } else {
+                    System.out.println("Intentos gastados. Programa terminado.");
+                }
+                break;
+
+            case 'b':
+                for (int intentos = 0; intentos < 3; intentos++) {
+                    System.out.println("Radio: ");
+                    radio = lector.nextDouble();
+                    System.out.println("Altura: ");
+                    altura = lector.nextDouble();
+                    System.out.println("Radio Mayor: ");
+                    radioMayor = lector.nextDouble();
+                    System.out.println("Generatriz: ");
+                    generatriz = lector.nextDouble();
+
+                    if (radio > 0 && altura > 0 && radioMayor > 0 && generatriz > 0) {
+                        areaLateral = (Math.PI * generatriz) * (radioMayor + radio);
+                        areaBaseMayor = Math.PI * Math.pow(radioMayor, 2);
+                        areaBaseMenor = Math.PI * Math.pow(radio, 2);
+                        areaTotal = areaLateral + areaBaseMayor + areaBaseMenor;
+                        break;
+                    } else {
+                        System.out.println("No se permiten negativos ni cero");
+                    }
+                }
+
+                if (radio > 0 && altura > 0 && radioMayor > 0 && generatriz > 0) {
+                    System.out.println("Área Total: " + areaTotal);
+                } else {
+                    System.out.println("Intentos gastados. Programa terminado.");
+                }
+                break;
+
+            case 'c':
+                for (int intentos = 0; intentos < 3; intentos++) {
+                    System.out.println("Radio: ");
+                    radio = lector.nextDouble();
+                    System.out.println("Altura: ");
+                    altura = lector.nextDouble();
+                    System.out.println("Radio Mayor: ");
+                    radioMayor = lector.nextDouble();
+                    System.out.println("Generatriz: ");
+                    generatriz = lector.nextDouble();
+
+                    if (radio > 0 && altura > 0 && radioMayor > 0 && generatriz > 0) {
+                        areaLateral = (Math.PI * generatriz) * (radioMayor + radio);
+                        areaBaseMayor = Math.PI * Math.pow(radioMayor, 2);
+                        areaBaseMenor = Math.PI * Math.pow(radio, 2);
+                        areaTotal = areaLateral + areaBaseMayor + areaBaseMenor;
+                        Pixal = (Math.PI * altura);
+                        radiosCuadrados = (Math.pow(radioMayor, 2) + Math.pow(radio, 2));
+                        radxrad = radioMayor * radio;
+                        volumen = Pixal * (radiosCuadrados + radxrad);
+                        totalVol = volumen / 3;
+                        break;
+                    } else {
+                        System.out.println("No se permiten negativos ni cero");
+                    }
+                }
+
+                if (radio > 0 && altura > 0 && radioMayor > 0 && generatriz > 0) {
+                    System.out.println("Volumen: " + volumen);
+                    System.out.println("Total Volumen: " + totalVol);
+                } else {
+                    System.out.println("Intentos gastados. Programa terminado.");
+                }
+                break;
+
+            default:
+                System.out.println("Ingrese una opción válida");
+        }
+    }
+
+    public static void calculoTroncoPiramide() {
+        Scanner lector = new Scanner(System.in);
+        char calculo;
+
+        double lado1 = 0, lado2 = 0, apotema = 0, altura = 0;
+        double perimetroBaseMayor, perimetroBaseMenor;
+        double areaLateral = 0, areaBaseMayor = 0, areaBaseMenor = 0, areaTotal = 0, volumen = 0;
+
+        System.out.println("¿Qué parte del tronco de pirámide desea calcular?");
+        System.out.println("a) Área Lateral");
+        System.out.println("b) Área Total");
+        System.out.println("c) Volumen");
+        calculo = lector.next().charAt(0);
+
+        switch (calculo) {
+            case 'a':
+                for (int intentos = 0; intentos < 3; intentos++) {
+                    System.out.println("Lado 1: ");
+                    lado1 = lector.nextDouble();
+                    System.out.println("Lado 2: ");
+                    lado2 = lector.nextDouble();
+                    System.out.println("Apotema: ");
+                    apotema = lector.nextDouble();
+                    System.out.println("Altura: ");
+                    altura = lector.nextDouble();
+
+                    if (lado1 > 0 && altura > 0 && lado2 > 0 && apotema > 0) {
+                        perimetroBaseMayor = lado1 * 4;
+                        perimetroBaseMenor = lado2 * 4;
+                        areaLateral = (perimetroBaseMayor + perimetroBaseMenor) * apotema / 2;
+                        break;
+                    } else {
+                        System.out.println("No se permiten negativos ni cero");
+                    }
+                }
+
+                if (lado1 > 0 && altura > 0 && lado2 > 0 && apotema > 0) {
+                    System.out.println("Área Lateral: " + areaLateral);
+                } else {
+                    System.out.println("Intentos gastados. Programa terminado.");
+                }
+                break;
+
+            case 'b':
+                for (int intentos = 0; intentos < 3; intentos++) {
+                    System.out.println("Lado 1: ");
+                    lado1 = lector.nextDouble();
+                    System.out.println("Lado 2: ");
+                    lado2 = lector.nextDouble();
+                    System.out.println("Apotema: ");
+                    apotema = lector.nextDouble();
+                    System.out.println("Altura: ");
+                    altura = lector.nextDouble();
+
+                    if (lado1 > 0 && altura > 0 && lado2 > 0 && apotema > 0) {
+                        perimetroBaseMayor = lado1 * 4;
+                        perimetroBaseMenor = lado2 * 4;
+                        areaLateral = (perimetroBaseMayor + perimetroBaseMenor) * apotema / 2;
+                        areaBaseMayor = lado1 * lado1;
+                        areaBaseMenor = lado2 * lado2;
+                        areaTotal = areaLateral + areaBaseMayor + areaBaseMenor;
+                        break;
+                    } else {
+                        System.out.println("No se permiten negativos ni cero");
+                    }
+                }
+
+                if (lado1 > 0 && altura > 0 && lado2 > 0 && apotema > 0) {
+                    System.out.println("Área Total: " + areaTotal);
+                } else {
+                    System.out.println("Intentos gastados. Programa terminado.");
+                }
+                break;
+
+            case 'c':
+                for (int intentos = 0; intentos < 3; intentos++) {
+                    System.out.println("Lado 1: ");
+                    lado1 = lector.nextDouble();
+                    System.out.println("Lado 2: ");
+                    lado2 = lector.nextDouble();
+                    System.out.println("Apotema: ");
+                    apotema = lector.nextDouble();
+                    System.out.println("Altura: ");
+                    altura = lector.nextDouble();
+
+                    if (lado1 > 0 && altura > 0 && lado2 > 0 && apotema > 0) {
+                        perimetroBaseMayor = lado1 * 4;
+                        perimetroBaseMenor = lado2 * 4;
+                        areaLateral = (perimetroBaseMayor + perimetroBaseMenor) * apotema / 2;
+                        areaBaseMayor = lado1 * lado1;
+                        areaBaseMenor = lado2 * lado2;
+                        areaTotal = areaLateral + areaBaseMayor + areaBaseMenor;
+                        volumen = (areaBaseMayor + areaBaseMenor) + (lado1 * lado2) * altura / 3;
+                        break;
+                    } else {
+                        System.out.println("No se permiten negativos ni cero");
+                    }
+                }
+
+                if (lado1 > 0 && altura > 0 && lado2 > 0 && apotema > 0) {
+                    System.out.println("Volumen: " + volumen);
+                } else {
+                    System.out.println("Intentos gastados. Programa terminado.");
+                }
+                break;
+
+            default:
+                System.out.println("Ingrese una opción válida");
+        }
     }
 }
